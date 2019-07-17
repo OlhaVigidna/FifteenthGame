@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/shuffler.css}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="gameField array">
+    <div th:each="arr : ${array}" class="tile"> [[${arr}]] </div>
+</div>
+
+<form th:action="@{/shuffling}" th:method="POST">
+    <input type="number" value="enter number of moves" name="numberOfMoves">
+    <input type="submit" value="shuffler">
+</form>
+
+
+<p>Shuffled game field</p>
+
+<div class="gameField shuffled">
+    <div th:each="shuff : ${shuffled}" class="tile"> [[${shuff}]] </div>
+</div>
+
+
+</body>
+</html>
