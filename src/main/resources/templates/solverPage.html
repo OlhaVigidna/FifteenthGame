@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>Choose file for solving</p>
+<form th:method="POST" th:action="@{/solve}" enctype="multipart/form-data">
+    <input TYPE="file" name="file" >
+    <input type="submit" name="solve" value="solve">
+</form>
+
+<br>
+
+<div th:each="move : ${moves}">[[${move}]]</div>
+
+</body>
+</html>
