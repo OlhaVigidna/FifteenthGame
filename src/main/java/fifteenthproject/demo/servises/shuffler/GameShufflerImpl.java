@@ -85,7 +85,7 @@ public class GameShufflerImpl implements GameShuffler {
                 shuffling(suffleredGameField, indexMoveTo);
 
                 numberOfMoves--;
-            } 
+            }
         }
 
 
