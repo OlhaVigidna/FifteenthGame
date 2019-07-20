@@ -34,7 +34,6 @@ public class MainController {
         int[] array = gameShuffler.getGameField();
         model.addAttribute("array", array);
         model.addAttribute("shuffled", array);
-        System.out.println("button work");
         return "shufflerStartPage";
     }
 
@@ -50,7 +49,6 @@ public class MainController {
 
     @GetMapping("/solve")
     public String solve() {
-        System.out.println("button work");
         return "solverPage";
     }
 
