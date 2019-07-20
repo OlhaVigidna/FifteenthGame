@@ -40,7 +40,7 @@ public class PuzzleFieldState {
         }
         return indexOfZero;
     }
-
+//Визначаємо еврестичне значення, тобто мфнімально необхідну кількість ходів
     private int findHeuristicCost(int[] ourGameField) {
 
         int heuristicSum = 0;
@@ -50,10 +50,28 @@ public class PuzzleFieldState {
             if (ourGameField[i] == 0) {
                 continue;
 
-            } else if (ourGameField[i] != (i + 1)) {
-                int localHeuristic = Math.abs(ourGameField[i] - (i + 1));
-                heuristicSum += (localHeuristic / 4) + (localHeuristic % 4);
+            } else{
+                int forRowGameTile = ourGameField[i];
+            int forColumnGameTile = ourGameField[i];
+
+
+            int currentColumn = (i%4)+1;
+            int columnMoveTo = forColumnGameTile%4;
+
+            if (forColumnGameTile%4==0){
+                columnMoveTo = 4;
+                forRowGameTile = forRowGameTile-1;
             }
+
+            int currentRow = i/4;
+            int rowMoveTo = (forRowGameTile-1)/4;
+
+            int moveInColumns = Math.abs(columnMoveTo-currentColumn);
+            int moveInRows = Math.abs(rowMoveTo-currentRow);
+
+            heuristicSum+=(moveInColumns+moveInRows);
+        }
+
         }
         return heuristicSum;
     }

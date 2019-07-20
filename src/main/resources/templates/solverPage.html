@@ -6,6 +6,9 @@
 </head>
 <body>
 
+<br>
+<br>
+
 <p>Choose file for solving</p>
 <form th:method="POST" th:action="@{/solve}" enctype="multipart/form-data">
     <input TYPE="file" name="file" >
@@ -16,6 +19,11 @@
 
 <div th:each="move : ${moves}">[[${move}]]</div>
 
+<br>
+<br>
+<br>
+<br>
+
 <p>Enter time interval for game plying</p>
 
 <h5>You can play game only after solving!</h5>
@@ -23,6 +31,11 @@
     <input type="number" name="time">
     <input type="submit" value="play">
 </form>
+
+<br>
+<br>
+
+<button type="submit" onclick="location.href='/'" style="position: center">Go to home page</button>
 
 
 </body>

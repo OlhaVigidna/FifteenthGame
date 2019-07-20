@@ -2,7 +2,7 @@ package fifteenthproject.demo.controllers;
 
 import fifteenthproject.demo.servises.playGame.Player;
 import fifteenthproject.demo.servises.shuffler.GameShuffler;
-import fifteenthproject.demo.servises.solover.FifteenthSolverImpl;
+import fifteenthproject.demo.servises.solover.FifteenthSolver;
 import fifteenthproject.demo.servises.solover.Move;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,16 +17,15 @@ import java.util.ArrayList;
 public class MainController {
 
     private GameShuffler gameShuffler;
-    private FifteenthSolverImpl fifteenthSolver;
+    private FifteenthSolver fifteenthSolver;
 
-    public MainController(GameShuffler gameShuffler, FifteenthSolverImpl fifteenthSolver) {
+    public MainController(GameShuffler gameShuffler, FifteenthSolver fifteenthSolver) {
         this.gameShuffler = gameShuffler;
         this.fifteenthSolver = fifteenthSolver;
     }
 
     @GetMapping("/")
     public String home() {
-        System.out.println("work");
         return "homePage";
     }
 

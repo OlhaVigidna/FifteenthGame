@@ -7,15 +7,7 @@
 </head>
 <body>
 
-<div class="gameField playing" id="gameState" th:value="${parentFields}">
-    <div th:each="field : ${gameField}" class="tile"> [[${field}]] </div>
-</div>
-<br>
-<br>
-<br>
-<br>
-
-<div class="gameField playing" th:value="${parentFields}" id="cheinge">
+<div class="gameField playing" th:value="${parentFields}" id="change">
     <div th:each="field : ${gameField}" class="tile" id="title"> [[${field}]] </div>
 </div>
 
@@ -25,16 +17,24 @@
 
 
 <div id="parentFields" style="display: none">
-    <div th:each="field : ${parentFields}" id="list">
-        <div th:each="fiel : ${field}" th:value="${fiel}" class="tile">[[${fiel}]]</div>
+    <div th:each="fields : ${parentFields}" id="list">
+        <div th:each="field : ${fields}" th:value="${field}" class="tile">[[${field}]]</div>
     </div>
 </div>
 
+<br>
+<br>
+
+<button type="submit" onclick="location.href='/'" style="position: center">Go to home page</button>
+
+<br>
+<br>
+
+<button type="submit" onclick="location.href='/solve'" >Go to previous page</button>
 
 <script>
     var gameFields = document.getElementById('parentFields').children;
     var time = document.getElementById('timeValue').innerText * 1000;
-
 
 
     console.log(this.time);
@@ -43,12 +43,11 @@
         for (var i = 0; i<gameFields.length; i++){
             (function (index) {
                 setTimeout(function () {
-                    document.getElementById("cheinge").innerHTML = this.gameFields[index].innerHTML;
+                    document.getElementById("change").innerHTML = this.gameFields[index].innerHTML;
                 },index*this.time);
             })(i)
             }
     }
-
 
 
 </script>

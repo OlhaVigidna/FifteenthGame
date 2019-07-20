@@ -7,8 +7,9 @@
 </head>
 <body>
 
-<div class="gameField array">
-    <div th:each="arr : ${array}" class="tile"> [[${arr}]] </div>
+
+<div class="gameField shuffled">
+    <div th:each="shuff : ${shuffled}" class="tile"> [[${shuff}]] </div>
 </div>
 
 <form th:action="@{/shuffling}" th:method="POST">
@@ -16,13 +17,12 @@
     <input type="submit" value="shuffler">
 </form>
 
+<br>
+<br>
 
-<p>Shuffled game field</p>
 
-<div class="gameField shuffled">
-    <div th:each="shuff : ${shuffled}" class="tile"> [[${shuff}]] </div>
-</div>
 
+<button type="submit" onclick="location.href='/'" style="position: center">Go to home page</button>
 
 </body>
 </html>
