@@ -1,5 +1,6 @@
 package fifteenthproject.demo.servises.solover;
 
+import fifteenthproject.demo.servises.playGame.Player;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,21 +15,28 @@ import java.util.stream.Collectors;
 @Service
 public class FifteenthSolverImpl {
 
-    public ArrayList<Move> startSolving(MultipartFile file) {
+    private Player player;
+    private PuzzleFieldState solvedState;
+
+
+
+    public void startSolving(MultipartFile file) {
 
         int[] gameField = parseMultipartFile(file);
         ArrayList<Move> listOfMoves = new ArrayList<>();
 
-        System.out.println("game field" + Arrays.toString(gameField));
 
 //        if (isSolvable(gameField)) {
 
         PuzzleFieldState currentState = new PuzzleFieldState(0, gameField);
+        ArrayList<int[]> currentStateParentFields = currentState.getParentFields();
+        currentStateParentFields.add(currentState.getGameField());
+        currentState.setParentFields(currentStateParentFields);
 
         PuzzleFieldState solvedState = solveGame(currentState);
 
+        this.solvedState = solvedState;
 
-        listOfMoves = solvedState.getListOfMoves();
 
         try {
             writeInFile(listOfMoves);
@@ -36,16 +44,14 @@ public class FifteenthSolverImpl {
             e.printStackTrace();
         }
 
-        for (Move listOfMove : listOfMoves) {
-            System.out.println(listOfMove);
-        }
-
 
 //        }else {
 //            System.out.println("unsolveble");
 //        }
 
-        return listOfMoves;
+       this.player = new Player(solvedState.getParentFields(), gameField);
+
+        ArrayList<int[]> parentFields = solvedState.getParentFields();
     }
 
     private int[] parseMultipartFile(MultipartFile file) {
@@ -214,8 +220,12 @@ public class FifteenthSolverImpl {
             newPuzzleFieldState = new PuzzleFieldState(scoreOfMoves, newGameFieldState);
 
             listOfMoves.add(new Move(valueToSwich, arrow));
+            ArrayList<int[]> parentFields = new ArrayList<>(currentState.getParentFields());
+            parentFields.add(newGameFieldState);
 
             newPuzzleFieldState.setListOfMoves(listOfMoves);
+
+            newPuzzleFieldState.setParentFields(parentFields);
 
         }
 
@@ -268,4 +278,19 @@ public class FifteenthSolverImpl {
 
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public PuzzleFieldState getSolvedState() {
+        return solvedState;
+    }
+
+    public void setSolvedState(PuzzleFieldState solvedState) {
+        this.solvedState = solvedState;
+    }
 }

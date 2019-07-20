@@ -18,6 +18,9 @@ public class PuzzleFieldState {
 
     private int[] gameField;
 
+    private ArrayList<int[]> parentFields = new ArrayList<>();
+
+
     public PuzzleFieldState(int gScore, int[] gameField) {
         this.gScore = gScore;
         this.gameField = gameField;
@@ -105,6 +108,14 @@ public class PuzzleFieldState {
 
     public void setGameField(int[] gameField) {
         this.gameField = gameField;
+    }
+
+    public ArrayList<int[]> getParentFields() {
+        return parentFields;
+    }
+
+    public void setParentFields(ArrayList<int[]> parentFields) {
+        this.parentFields = parentFields;
     }
 
     @Override

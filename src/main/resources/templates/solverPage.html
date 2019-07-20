@@ -16,5 +16,14 @@
 
 <div th:each="move : ${moves}">[[${move}]]</div>
 
+<p>Enter time interval for game plying</p>
+
+<h5>You can play game only after solving!</h5>
+<form th:action="@{/play}" th:method="POST">
+    <input type="number" name="time">
+    <input type="submit" value="play">
+</form>
+
+
 </body>
 </html>

@@ -1,5 +1,6 @@
 package fifteenthproject.demo.controllers;
 
+import fifteenthproject.demo.servises.playGame.Player;
 import fifteenthproject.demo.servises.shuffler.GameShuffler;
 import fifteenthproject.demo.servises.solover.FifteenthSolverImpl;
 import fifteenthproject.demo.servises.solover.Move;
@@ -7,14 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 @Controller
 public class MainController {
@@ -60,18 +57,23 @@ public class MainController {
 
     @PostMapping("/solve")
     public String solveGame(@RequestPart(name = "file", required = false) MultipartFile file, Model model) {
-        System.out.println("file size " + file.getSize());
-        System.out.println("Start solving");
-        ArrayList<Move> listOfMoves = fifteenthSolver.startSolving(file);
+        this.fifteenthSolver.startSolving(file);
+        ArrayList<Move> listOfMoves = this.fifteenthSolver.getSolvedState().getListOfMoves();
         model.addAttribute("moves", listOfMoves);
         return "solverPage";
     }
 
 
-    @GetMapping("/play")
-    public String play() {
-        System.out.println("button work");
-        return "index";
+    @PostMapping("/play")
+    public String play(Integer time, Model model) {
+        Player player = this.fifteenthSolver.getPlayer();
+
+        model.addAttribute("timeInterval", time);
+        model.addAttribute("gameField", player.getStartGameField());
+        model.addAttribute("parentFields", player.getParentFields());
+
+
+        return "playGameSolving";
     }
 
 }

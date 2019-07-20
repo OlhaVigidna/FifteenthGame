@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/shuffler.css}">
+</head>
+<body>
+
+<div class="gameField playing" id="gameState" th:value="${parentFields}">
+    <div th:each="field : ${gameField}" class="tile"> [[${field}]] </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<div class="gameField playing" th:value="${parentFields}" id="cheinge">
+    <div th:each="field : ${gameField}" class="tile" id="title"> [[${field}]] </div>
+</div>
+
+<button onclick="buttonClicked()">Start</button>
+
+<p id="timeValue" style="display: none">[[${timeInterval}]]</p>
+
+
+<div id="parentFields" style="display: none">
+    <div th:each="field : ${parentFields}" id="list">
+        <div th:each="fiel : ${field}" th:value="${fiel}" class="tile">[[${fiel}]]</div>
+    </div>
+</div>
+
+
+<script>
+    var gameFields = document.getElementById('parentFields').children;
+    var time = document.getElementById('timeValue').innerText * 1000;
+
+
+
+    console.log(this.time);
+
+    function buttonClicked(){
+        for (var i = 0; i<gameFields.length; i++){
+            (function (index) {
+                setTimeout(function () {
+                    document.getElementById("cheinge").innerHTML = this.gameFields[index].innerHTML;
+                },index*this.time);
+            })(i)
+            }
+    }
+
+
+
+</script>
+</body>
+</html>
